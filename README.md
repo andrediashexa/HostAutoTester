@@ -1,4 +1,4 @@
-<h1>HostAutoTeste</h1>
+<h1>HostAutoTester</h1>
 
 Tutorial to use the script:
 
