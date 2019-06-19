@@ -1,8 +1,12 @@
 #!/bin/bash
 
-if [ -f "/tmp/relatorio" ]
+#Set the directory of report file
+report=/report
+
+if [ -f "$report" ]
 then
-	rm /tmp/relatorio
+	rm $report
+	
 fi
 
 if [ -f "/tmp/lista" ]
@@ -18,12 +22,12 @@ echo "" >> /tmp/lista
 while read lista
 do
 	echo $lista - $(whois $lista | grep -i NetName | awk {'print $2'})
-	echo $lista >> /relatorio
-	whois $lista | grep -i NetName | awk {'print $2'} >> /tmp/relatorio
-	mtr -4 -r -c$1 -w -b --no-dns $lista | grep "|" >> /tmp/relatorio
-	echo "" >> /tmp/relatorio
+	echo $lista >> $report
+	whois $lista | grep -i NetName | awk {'print $2'} >> $report
+	mtr -4 -r -c$1 -w -b --no-dns $lista | grep "|" >> $report
+	echo "" >> $report
 
 	sleep 1s
 done < /tmp/lista
 
-more /tmp/relatorio
+more $report
