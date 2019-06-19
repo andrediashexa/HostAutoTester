@@ -1,29 +1,29 @@
 #!/bin/bash
 
-if [ -f "/relatorio" ]
+if [ -f "/tmp/relatorio" ]
 then
-	rm /relatorio
+	rm /tmp/relatorio
 fi
 
-if [ -f "/lista" ]
+if [ -f "/tmp/lista" ]
 then
-	rm /lista
+	rm /tmp/lista
 fi
 
-echo "Coloque a seguir os IPs que deseja testar"
+echo "Paste every IP address that you want to test."
 sleep 1s
-nano /lista
-echo "" >> /lista
+nano /tmp/lista
+echo "" >> /tmp/lista
 
 while read lista
 do
 	echo $lista - $(whois $lista | grep -i NetName | awk {'print $2'})
 	echo $lista >> /relatorio
-	whois $lista | grep -i NetName | awk {'print $2'} >> /relatorio
-	mtr -4 -r -c$1 -w -b --no-dns $lista | grep "|" >> /relatorio
-	echo "" >> /relatorio
+	whois $lista | grep -i NetName | awk {'print $2'} >> /tmp/relatorio
+	mtr -4 -r -c$1 -w -b --no-dns $lista | grep "|" >> /tmp/relatorio
+	echo "" >> /tmp/relatorio
 
 	sleep 1s
-done < /lista
+done < /tmp/lista
 
-more /relatorio
+more /tmp/relatorio
