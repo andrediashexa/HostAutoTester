@@ -2,7 +2,9 @@
 
 Tutorial to use the script, if using debian-like O.S. :
 
-<q>apt-get install git nano mtr whois -y <br>
+<q>
+apt update
+apt-get install git nano mtr whois -y <br>
 git clone https://github.com/andrediashexa/HostAutoTester.git <br>
 cd HostAutoTester <br>
 chmod a+x run.sh <br>
